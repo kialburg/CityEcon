@@ -18,7 +18,7 @@ import logging
 # Which is GOOD, because the files are placed relative
 # to that location.  But it could be improved.
 
-sys.path.append("./src/pyesridump/esridump")
+sys.path.append("../src/pyesridump/esridump")
 from dumper import EsriDumper
 
 

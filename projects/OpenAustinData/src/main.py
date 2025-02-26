@@ -33,14 +33,16 @@ zoning_local_file = "inputs/PLANNINGCADASTRE_zoning_small_map_scale.json.zip"
 
 # Appraisal are 260MB compressed
 appraisals = {
-    "2023" : { "url": "https://traviscad.org/wp-content/largefiles/2023%20Appraisal%20Export%20Supp%200_04242023.zip",
-               "local_file": "downloads/2023 Appraisal Export Supp 0_04242023.zip" },
+    "2024" : { "url": "https://traviscad.org//wp-content/largefiles/travis_SUPP%20312_2024_WEBSITE%20EXPORT_Renamed.zip",
+               "local_file": "downloads/travis_SUPP 312_2024_WEBSITE EXPORT_Renamed.zip" },
+    # "2023" : { "url": "https://traviscad.org/wp-content/largefiles/2023%20Appraisal%20Export%20Supp%200_04242023.zip",
+    #            "local_file": "downloads/2023 Appraisal Export Supp 0_04242023.zip" },
     
-    "2022" : { "url": "https://traviscad.org/wp-content/largefiles/2022%20Certified%20Appraisal%20Export%20Supp%200_07252022.zip",
-               "local_file" : "downloads/2022 Certified Appraisal Export Supp 0_07252022.zip" },
+    # "2022" : { "url": "https://traviscad.org/wp-content/largefiles/2022%20Certified%20Appraisal%20Export%20Supp%200_07252022.zip",
+    #            "local_file" : "downloads/2022 Certified Appraisal Export Supp 0_07252022.zip" },
 
-    "2021" : { "url": "https://traviscad.org/wp-content/largefiles/2021-08-02_008042_APPRAISAL_STD%20EXPORT%20R%26P%20ALLJUR%20AS%20OF%202021.zip",
-               "local_file" : "downloads/2021-08-02_008042_APPRAISAL_STD EXPORT R&P ALLJUR AS OF 2021.zip" },
+    # "2021" : { "url": "https://traviscad.org/wp-content/largefiles/2021-08-02_008042_APPRAISAL_STD%20EXPORT%20R%26P%20ALLJUR%20AS%20OF%202021.zip",
+    #            "local_file" : "downloads/2021-08-02_008042_APPRAISAL_STD EXPORT R&P ALLJUR AS OF 2021.zip" },
 
     # 2012 appraisal file, from Open Records Request - R004028-112122
     "2012" : { "url" : "",
@@ -79,7 +81,7 @@ def main():
     #
     # Check requirements
     #
-
+    os.chdir("D:/Git/CityEcon/projects/OpenAustinData/")
     needed_dirs = ["downloads/", "inputs/", "tmp/", "outputs/"]
     for dir in needed_dirs:
         if not os.path.exists(dir):
@@ -115,14 +117,16 @@ def main():
             continue
         print("Converting appraisal files for " + year_str + " to CSV.")
         appraisal_fw_dir = "tmp/appraisal_fixedwidth_" + year_str
-        if not os.path.exists(appraisal_fw_dir):
-            print("  making directory for fixedwidth files for " + year_str)
-            os.mkdir(appraisal_fw_dir)
+        # Not working in Windows. Manually unzipped
+        # if not os.path.exists(appraisal_fw_dir):
+        #     print("  making directory for fixedwidth files for " + year_str)
+        #     os.mkdir(appraisal_fw_dir)
             # Zip file's compression method was not supported.
             #with zipfile.ZipFile("downloads/2022 Certified Appraisal Export Supp 0_07252022.zip", 'r') as zip_ref:
             #    zip_ref.extractall(appraisal_fw_dir)
-            print("  unzipping fixed-width files for " + year_str)
-            subprocess.run(["unzip", appraisals[year_str]["local_file"], "-d", appraisal_fw_dir])
+            # print("  unzipping fixed-width files for " + year_str)
+            # This doesn't appear to work, at least in Windows.
+            # subprocess.run(["unzip", appraisals[year_str]["local_file"], "-d", appraisal_fw_dir])
 
         appraisal_csv_dir = "tmp/appraisal_CSV_" + year_str
         if not os.path.exists(appraisal_csv_dir):    
